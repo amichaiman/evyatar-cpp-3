@@ -18,8 +18,6 @@ public:
     bool config(char *fileName);
     bool init(char *fileName);
 
-    void printInfo();
-
 private:
     Group players;
     Arena arena;

@@ -3,3 +3,21 @@
 //
 
 #include "Spot.h"
+
+Spot &Spot::operator--() {
+    numOfPlayers--;
+    return *this;
+}
+
+Spot &Spot::operator++(int) {
+    numOfPlayers++;
+    return *this;
+}
+
+void Spot::setNumberOfPlayers(int n) {
+    numOfPlayers = 0;
+}
+
+int Spot::getNumberOfPlayers() {
+    return numOfPlayers;
+}

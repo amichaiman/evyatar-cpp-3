@@ -15,12 +15,13 @@ void Game::start() {
     int iteration;
     for (iteration=0; iteration < numOfIterations; iteration++){
         players.update();
-        arena.update();
-        if (arena.objectiveReached()){
+        arena.update(players);
+        if (arena.isObjectiveReached()){
             break;
         }
     }
     std::cout << "game ended after " << iteration << std::endl;
+    players.printInfo();
 }
 
 bool Game::config(char *fileName) {
@@ -63,7 +64,3 @@ bool Game::goodFileState(const std::ifstream &file) {
     return !(file.fail() || !file.good() || file.bad() || file.eof());
 }
 
-void Game::printInfo() {
-    std::cout << numOfIterations << std::endl;
-    players.printInfo();
-}

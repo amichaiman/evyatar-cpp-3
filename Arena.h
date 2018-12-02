@@ -13,14 +13,18 @@
 
 class Arena {
 public:
-    void update();
-private:
-public:
-    void setPlayers(Group *players);
+    Arena();
 
+    void update(Group &group);
+    void setPlayers(Group *players);
+    bool isObjectiveReached();
+    int operator()(int i, int j);
 private:
     Spot arena[Limits::X_MAX][Limits::Y_MAX];
     Group *players;
+    bool objectiveReached;
+
+    bool isPointInSpot(int i, int j, Point p) const;
 };
 
 

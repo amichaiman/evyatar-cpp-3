@@ -8,31 +8,30 @@
 
 #include "Player.h"
 #include "Point.h"
+#include <fstream>
+using namespace std;
 
 class Group {
 public:
     const Point &getObjective() const;
     void setObjective(const Point &objective);
     int getNumOfPlayers() const;
-    void setNumOfPlayers(int numOfPlayers);
 
     bool init(char *fileName);
-
     virtual ~Group();
-
     void printInfo();
 
-    void update();
+    Player *getPlayers() const;
 
+    void update();
 private:
     Player *players;
+    Player *globalBest;
     Point objective;
     int numOfPlayers;
-    int leaderId;
 
     bool goodFileState(const std::ifstream &file);
-
-    int computeLeaderId();
+    void updateGlobalBest();
 };
 
 

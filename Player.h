@@ -10,19 +10,26 @@
 #include "SpeedVector.h"
 
 class Player {
+public:
+    Player();
+    void setCurrentLocation(Point point, Point objective);
+    void setSpeedVector(SpeedVector &vector);
+    void setId(int i);
+    void printInfo();
+    void update(Point &objective, Player &globalBest);
+    const Point &getCurrentLocation() const;
+
+    Point & getPersonalBest();
+
 private:
     int id;
     Point currentLocation;
+    Point personalBest;
     SpeedVector speed;
-public:
-    void setCurrentLocation(Point point);
-    void setSpeedVector(SpeedVector vector);
-    void setId(int i);
-    void printInfo();
 
-    void update();
-
-    double getDistanceFromPoint(Point point);
+    bool isPersonalBest(Point &newPoint, Point &objective) const;
+    void setNewSpeed(Point &objective, Player &globalBest);
+    double r();
 };
 
 

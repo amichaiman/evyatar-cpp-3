@@ -20,10 +20,6 @@ int Group::getNumOfPlayers() const {
     return numOfPlayers;
 }
 
-void Group::setNumOfPlayers(int numOfPlayers) {
-    Group::numOfPlayers = numOfPlayers;
-}
-
 bool Group::init(char *fileName) {
     std::ifstream file;
     file.open(fileName, std::ios::in);
@@ -55,11 +51,11 @@ bool Group::init(char *fileName) {
         if (!Limits::inArena(p)){
             return false;
         }
-        players[i].setCurrentLocation(p);
+        players[i].setCurrentLocation(p, objective);
         players[i].setSpeedVector(v);
         players[i].setId(i);
     }
-    leaderId = computeLeaderId();
+    updateGlobalBest();
     return true;
 }
 
@@ -79,20 +75,23 @@ void Group::printInfo() {
 
 void Group::update() {
     for (int i=0; i<numOfPlayers; i++){
-        players[i].update();
+        players[i].update(objective, *globalBest);
     }
+    updateGlobalBest();
 }
 
-int Group::computeLeaderId() {
-    int id = 0;
+void Group::updateGlobalBest() {
     double currentDistance;
     double shortestDistance = INT32_MAX;
     for (int i=0; i<numOfPlayers; i++){
-        currentDistance = players[i].getDistanceFromPoint(objective);
+        currentDistance = players[i].getCurrentLocation().getDistanceFrom(objective);
         if (currentDistance < shortestDistance){
             shortestDistance = currentDistance;
-            id = i;
+            globalBest = &players[i];
         }
     }
-    return id;
+}
+
+Player *Group::getPlayers() const {
+    return players;
 }
