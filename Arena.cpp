@@ -2,6 +2,7 @@
 // Created by amichai on 24/11/18.
 //
 
+#include <iostream>
 #include "Arena.h"
 #include "Limits.h"
 
@@ -31,8 +32,8 @@ void Arena::setPlayers(Group *players) {
 }
 
 bool Arena::isPointInSpot(int i, int j, Point p) const {
-   return p.x >= i && p.x < i+1 &&
-         p.y >= j && p.y < j+1;
+   return p.x >= j && p.x < j+1 &&
+         p.y >= i && p.y < i+1;
 }
 
 int Arena::operator()(int i, int j) {

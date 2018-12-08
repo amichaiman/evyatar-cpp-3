@@ -8,9 +8,6 @@
 #include "Limits.h"
 
 void Player::setCurrentLocation(Point point, Point objective) {
-    if (isPersonalBest(point, objective)){
-        personalBest = point;
-    }
     if (point.x < Limits::X_MIN) {
         point.x = Limits::X_MIN;
     } else if (point.x > Limits::X_MAX) {
@@ -20,6 +17,9 @@ void Player::setCurrentLocation(Point point, Point objective) {
         point.y = Limits::Y_MIN;
     } else if (point.y > Limits::Y_MAX) {
         point.y = Limits::Y_MAX;
+    }
+    if (isPersonalBest(point, objective)){
+        personalBest = point;
     }
     currentLocation = point;
 }
@@ -37,8 +37,9 @@ void Player::printInfo() {
 }
 
 void Player::update(Point &objective, Player &globalBest) {
+    SpeedVector newSpeed = getNewSpeed(globalBest);
     setCurrentLocation(currentLocation+speed, objective);
-    setNewSpeed(objective, globalBest);
+    speed = newSpeed;
 }
 
 const Point &Player::getCurrentLocation() const {
@@ -52,12 +53,8 @@ bool Player::isPersonalBest(Point &newPoint, Point &objective) const{
             newPoint.getDistanceFrom(objective) < currentLocation.getDistanceFrom(objective);
 }
 
-void Player::setNewSpeed(Point &objective, Player &globalBest) {
-    speed = (speed*0.25) + (personalBest-currentLocation)*r() + (globalBest.getPersonalBest()-currentLocation)*r();
-}
-
-Point &Player::getPersonalBest() {
-    return personalBest;
+SpeedVector Player::getNewSpeed(Player &globalBest) {
+    return (speed*0.25) + (personalBest-currentLocation)*r() + (globalBest.getCurrentLocation()-currentLocation)*r();
 }
 
 double Player::r() {

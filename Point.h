@@ -18,9 +18,9 @@ public:
     double x,y;
     void printInfo();
     double getDistanceFrom(Point point) const;
-    Point& operator-(Point &rhs);
-    Point& operator+(SpeedVector &rhs);
-    Point& operator*(double n);
+    Point operator-(const Point &rhs) const;
+    Point operator+(const SpeedVector &rhs) const;
+    Point operator*(const double n) const;
 
     int getPrecision(double x);
 };

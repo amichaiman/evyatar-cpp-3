@@ -14,9 +14,9 @@ public:
     virtual ~SpeedVector();
     double speedX, speedY;
     void printInfo();
-    SpeedVector& operator*(double n);
-    SpeedVector& operator+(double n);
-    SpeedVector& operator+(Point &rhs);
+    SpeedVector operator*(const double n) const;
+    SpeedVector operator+(const double n) const;
+    SpeedVector operator+(const Point &rhs) const;
 };
 
 

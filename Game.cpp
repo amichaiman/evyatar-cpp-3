@@ -20,7 +20,7 @@ void Game::start() {
             break;
         }
     }
-    std::cout << "game ended after " << iteration << std::endl;
+    std::cout << iteration << std::endl;
     players.printInfo();
 }
 
@@ -61,6 +61,6 @@ bool Game::init(char *fileName) {
 }
 
 bool Game::goodFileState(const std::ifstream &file) {
-    return !(file.fail() || !file.good() || file.bad() || file.eof());
+    return !file.fail() && !file.bad();
 }
 

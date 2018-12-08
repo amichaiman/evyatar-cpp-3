@@ -20,20 +20,23 @@ void SpeedVector::printInfo() {
     std::cout << "x: " << speedX << " y: " << speedY << std::endl;
 }
 
-SpeedVector &SpeedVector::operator*(double n) {
-    speedX *= n;
-    speedY *= n;
-    return *this;
+SpeedVector SpeedVector::operator*(const double n) const {
+    SpeedVector newSpeedVector;
+    newSpeedVector.speedX = speedX*n;
+    newSpeedVector.speedY = speedY*n;
+    return newSpeedVector;
 }
 
-SpeedVector &SpeedVector::operator+(double n) {
-    speedX += n;
-    speedY += n;
-    return *this;
+SpeedVector SpeedVector::operator+(const double n) const {
+    SpeedVector newSpeedVector;
+    newSpeedVector.speedX = speedX+n;
+    newSpeedVector.speedY = speedY+n;
+    return newSpeedVector;
 }
 
-SpeedVector &SpeedVector::operator+(Point &rhs) {
-    speedX += rhs.x;
-    speedY += rhs.y;
-    return *this;
+SpeedVector SpeedVector::operator+(const Point &rhs) const {
+    SpeedVector newSpeedVector;
+    newSpeedVector.speedX = speedX+rhs.x;
+    newSpeedVector.speedY = speedY+rhs.y;
+    return newSpeedVector;
 }

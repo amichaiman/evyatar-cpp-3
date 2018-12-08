@@ -35,21 +35,24 @@ double Point::getDistanceFrom(Point point) const{
     return sqrt(pow(x-point.x,2)+pow(y-point.y,2));
 }
 
-Point &Point::operator-(Point &rhs) {
-    x -= rhs.x;
-    y -= rhs.y;
-    return *this;
+Point Point::operator-(const Point &rhs) const {
+    Point newPoint;
+    newPoint.x = x-rhs.x;
+    newPoint.y = y-rhs.y;
+    return newPoint;
 }
 
-Point &Point::operator*(double n) {
-    x *= n;
-    y *= n;
-    return *this;
+Point Point::operator*(const double n) const {
+    Point newPoint;
+    newPoint.x = x*n;
+    newPoint.y = y*n;
+    return newPoint;
 }
 
-Point &Point::operator+(SpeedVector &rhs) {
-    x += rhs.speedX;
-    y += rhs.speedY;
-    return *this;
+Point Point::operator+(const SpeedVector &rhs) const {
+    Point newPoint;
+    newPoint.x = x+rhs.speedX;
+    newPoint.y = y+rhs.speedY;
+    return newPoint;
 }
 

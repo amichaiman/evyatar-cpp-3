@@ -55,12 +55,11 @@ bool Group::init(char *fileName) {
         players[i].setSpeedVector(v);
         players[i].setId(i);
     }
-    updateGlobalBest();
-    return true;
+    return file.eof();
 }
 
 bool Group::goodFileState(const std::ifstream &file) {
-    return !(file.fail() || !file.good() || file.bad() || file.eof());
+    return !file.fail() && !file.bad();
 }
 
 Group::~Group() {
@@ -69,15 +68,18 @@ Group::~Group() {
 
 void Group::printInfo() {
     for (int i=0; i<numOfPlayers; i++){
-        players[i].printInfo();
+        cout << players[i].getCurrentLocation().x << " " << players[i].getCurrentLocation().y;
+        if (i != numOfPlayers-1){
+            cout << endl;
+        }
     }
 }
 
 void Group::update() {
+    updateGlobalBest();
     for (int i=0; i<numOfPlayers; i++){
         players[i].update(objective, *globalBest);
     }
-    updateGlobalBest();
 }
 
 void Group::updateGlobalBest() {

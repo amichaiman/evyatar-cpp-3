@@ -19,8 +19,6 @@ public:
     void update(Point &objective, Player &globalBest);
     const Point &getCurrentLocation() const;
 
-    Point & getPersonalBest();
-
 private:
     int id;
     Point currentLocation;
@@ -28,8 +26,9 @@ private:
     SpeedVector speed;
 
     bool isPersonalBest(Point &newPoint, Point &objective) const;
-    void setNewSpeed(Point &objective, Player &globalBest);
     double r();
+
+    SpeedVector getNewSpeed(Player &globalBest);
 };
 
 
